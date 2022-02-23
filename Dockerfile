@@ -32,7 +32,7 @@ USER appuser
 # The entrypoint translates the variables from the environment into a config file to be read from python
 # I did this to avoid modifying the original python app
 COPY ./entrypoint.sh /
-#RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
