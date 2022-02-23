@@ -27,9 +27,9 @@ ADD . /app
 
 # The entrypoint translates the variables from the environment into a config file to be read from python
 # I did this to avoid modifying the original python app
-COPY ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-RUN /entrypoint.sh
+#COPY ./entrypoint.sh /
+#RUN chmod +x /entrypoint.sh
+#RUN /entrypoint.sh
 
 # Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
 RUN useradd appuser && chown -R appuser /app
@@ -38,4 +38,4 @@ USER appuser
 
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "./os.py"]
+CMD ["python", "./teslamateMqttToTelegram.py"]
