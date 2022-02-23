@@ -6,9 +6,10 @@ Script that collects data from the Teslamate via MQTT and sends messages to a Te
 
 ### Requirements
 
-* Python 2.7+
-* Install dependencies of Python included in requirements.txt
-* Docker (if running in a docker container)
+* For python version: Python 2.7+ & Install dependencies of Python included in requirements.txt
+* For Docker version: Docker (if running in a docker container)
+* To obtain your Telegram [API bot token](https://core.telegram.org/bots#6-botfather)
+* To obtain your Telegram [chat ID](https://docs.influxdata.com/kapacitor/v1.5/event_handlers/telegram/#get-your-telegram-chat-id)
 
 ### Instructions for running on Docker
 
@@ -16,26 +17,26 @@ Script that collects data from the Teslamate via MQTT and sends messages to a Te
 1. Create a file called `docker-compose.yml` with the following content (adopt with your own values - see descriptions in python version):
 
    ```yml title="docker-compose.yml"
-      version: "3"
+version: "3"
 
-      services:
-        teslamateMqttToTelegram:
-          image: teslamateMqttToTelegram/teslamateMqttToTelegram:latest
-          restart: unless-stopped
-          environment:
-           - MQTT_SERVER = "@@@@@@@@"                              
-            - MQTT_PORT = "@@@@"                                    
-            - BOT_TOKEN = "@@@@@@@@@@:@@@@@@@@@@@@@@@@@@@@"         
-            - BOT_CHAT_ID = "@@@@@@@@@@"                            
-            - OPTIONS = "update_version"                            
-            - CAR_ID = "1"                                          
-            - SEND_RESUME = True/False              
-            - DEBUG = True/False                               
-          ports:
-            - 1883
-          build:
-            context: .
-            dockerfile: Dockerfile
+services:
+  teslamatemqtttotelegram:
+    image: teslamatemqtttotelegram/teslamatemqtttotelegram:latest
+    restart: unless-stopped
+    environment:
+     - MQTT_SERVER =
+     - MQTT_PORT =
+     - BOT_TOKEN =
+     - BOT_CHAT_ID =
+     - OPTIONS = update_version
+     - CAR_ID = 1
+     - SEND_RESUME = True
+     - DEBUG = True
+   ports:
+     - 1883
+   build:
+     context: .
+     dockerfile: Dockerfile
    ```
 
 2. Build and start the docker container with `docker-compose up`. To run the containers in the background add the `-d` flag:

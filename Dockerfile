@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 
 # Update pip and install pip requirements
 RUN python -m pip install --upgrade pip
-ADD src/requirements.txt .
+ADD requirements.txt .
 RUN python -m pip install -r requirements.txt
 
 WORKDIR /app
