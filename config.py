@@ -1,4 +1,5 @@
 import os
+print os.getenv('MQTT_SERVER')
 
 MQTT_SERVER = os.getenv('MQTT_SERVER')
 MQTT_PORT = os.getenv('MQTT_PORT')
