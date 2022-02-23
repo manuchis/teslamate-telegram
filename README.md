@@ -8,8 +8,43 @@ Script that collects data from the Teslamate via MQTT and sends messages to a Te
 
 * Python 2.7+
 * Install dependencies of Python included in requirements.txt
+* Docker (if running in a docker container)
 
-### Instructions
+### Instructions for running on Docker
+
+
+1. Create a file called `docker-compose.yml` with the following content (adopt with your own values - see descriptions in python version):
+
+   ```yml title="docker-compose.yml"
+      version: "3"
+
+      services:
+        teslamateMqttToTelegram:
+          image: teslamateMqttToTelegram/teslamateMqttToTelegram:latest
+          restart: unless-stopped
+          environment:
+           - MQTT_SERVER = "@@@@@@@@"                              
+            - MQTT_PORT = "@@@@"                                    
+            - BOT_TOKEN = "@@@@@@@@@@:@@@@@@@@@@@@@@@@@@@@"         
+            - BOT_CHAT_ID = "@@@@@@@@@@"                            
+            - OPTIONS = "update_version"                            
+            - CAR_ID = "1"                                          
+            - SEND_RESUME = True/False              
+            - DEBUG = True/False                               
+          ports:
+            - 1883
+          build:
+            context: .
+            dockerfile: Dockerfile
+   ```
+
+2. Build and start the docker container with `docker-compose up`. To run the containers in the background add the `-d` flag:
+
+   ```bash
+   docker-compose up -d
+   ```
+
+### Instructions for running directly on python
 
 1. Install all dependencies of Python
 ~~~
@@ -35,7 +70,9 @@ python ./teslamateMqttToTelegram.py
 * Run in the background
 ~~~
 nohup python ./teslamateMqttToTelegram.py & > /dev/null 2>&1
-~~~
+~~~+
+
+
 ## Credits
 
 - Authors: Carlos Cuezva – [List of contributors](https://github.com/carloscuezva/teslamate-telegram/graphs/contributors)
