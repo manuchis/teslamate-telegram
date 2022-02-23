@@ -28,7 +28,9 @@ botMessage = {
 }
 logger = logging.getLogger()
 RESTART = 15
-OPTIONS = conf.OPTIONS.split("|")
+print(conf.OPTIONS)
+if conf.OPTIONS !== None:
+    OPTIONS = conf.OPTIONS.split("|")
 
 
 def setup_logging():
