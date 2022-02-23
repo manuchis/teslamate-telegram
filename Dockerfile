@@ -29,7 +29,7 @@ ADD . /app
 # I did this to avoid modifying the original python app
 COPY ./entrypoint.sh /
 RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN /entrypoint.sh
 
 # Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
 RUN useradd appuser && chown -R appuser /app
@@ -38,5 +38,4 @@ USER appuser
 
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-COPY ./teslamateMqttToTelegram.py /
-CMD ["python", "/teslamateMqttToTelegram.py"]
+CMD ["python", "./teslamateMqttToTelegram.py"]
