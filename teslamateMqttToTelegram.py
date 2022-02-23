@@ -29,7 +29,7 @@ botMessage = {
 logger = logging.getLogger()
 RESTART = 15
 print(conf.OPTIONS)
-if conf.OPTIONS !== None:
+if conf.OPTIONS != None:
     OPTIONS = conf.OPTIONS.split("|")
 
 
