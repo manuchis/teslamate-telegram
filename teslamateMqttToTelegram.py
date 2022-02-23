@@ -196,9 +196,9 @@ def create_mqtt_connection():
 
     try:
         if conf.DEBUG:
-            logger.info("Trying to connect to the MQTT")
+            logger.info("Trying to connect to the MQTT with port ", conf.MQTT_PORT, " and host ", conf.MQTT_SERVER)
 
-        client.connect(conf.MQTT_SERVER, int(conf.MQTT_PORT), 30)
+        client.connect(conf.MQTT_SERVER, int(conf.MQTT_PORT), 60)
         client.loop_start()
 
     except (ValueError, Exception):
