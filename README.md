@@ -15,7 +15,7 @@ Script that collects data from the Teslamate via MQTT and sends messages to a Te
 
 1. Create a file called `docker-compose.yml` with the following content (adopt with your own values - see descriptions in python version):
 
-   ```yml title="docker-compose.yml"
+~~~
 version: "3"
 
 services:
@@ -36,7 +36,7 @@ services:
    build:
      context: .
      dockerfile: Dockerfile
-   ```
+~~~
 
 2. Build and start the docker container with `docker-compose up`. To run the containers in the background add the `-d` flag:
 
