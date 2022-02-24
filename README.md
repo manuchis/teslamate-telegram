@@ -1,6 +1,5 @@
 # TeslaMate to Telegram
 
-[![](https://img.shields.io/badge/Donate-PayPal-ff69b4.svg)](https://www.paypal.com/donate?hosted_button_id=9H6B9CRBL6V4E)
 
 Script that collects data from the Teslamate via MQTT and sends messages to a Telegram chatbot.
 
@@ -24,7 +23,7 @@ services:
     image: teslamatemqtttotelegram/teslamatemqtttotelegram:latest
     restart: unless-stopped
     environment:
-     - MQTT_SERVER = 
+     - MQTT_SERVER =
      - MQTT_PORT =
      - BOT_TOKEN =
      - BOT_CHAT_ID =
@@ -70,10 +69,11 @@ python ./teslamateMqttToTelegram.py
 * Run in the background
 ~~~
 nohup python ./teslamateMqttToTelegram.py & > /dev/null 2>&1
-~~~+
+~~~
 
 
 ## Credits
 
-- Authors: Carlos Cuezva – [List of contributors](https://github.com/carloscuezva/teslamate-telegram/graphs/contributors)
+- Authors: Carlos Cuezva – [List of contributors](https://github.com/carloscuezva/teslamate-telegram/graphs/contributors) [![](https://img.shields.io/badge/Donate-PayPal-ff69b4.svg)](https://www.paypal.com/donate?hosted_button_id=9H6B9CRBL6V4E)
+- Docker version: Manuel Portela
 - Distributed under MIT License
