@@ -24,7 +24,7 @@ services:
     image: teslamatemqtttotelegram/teslamatemqtttotelegram:latest
     restart: unless-stopped
     environment:
-     - MQTT_SERVER =
+     - MQTT_SERVER = 
      - MQTT_PORT =
      - BOT_TOKEN =
      - BOT_CHAT_ID =
@@ -51,8 +51,7 @@ services:
 ~~~
 pip install -r requirements.txt
 ~~~
-2. Create the `config.py` file
-3. Configure the variables of your MQTT of Teslamate and ABRP inside `config.py` file
+2. Replace the `config.py` file with the variables of your MQTT of Teslamate and ABRP inside `config.py` file
 ~~~
 MQTT_SERVER = "@@@@@@@@"                              # MQTT server address (e.g. "127.0.0.1")
 MQTT_PORT = "@@@@"                                    # MQTT server port (e.g. "1883")

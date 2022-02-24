@@ -204,7 +204,6 @@ def create_mqtt_connection():
     except (ValueError, Exception):
         if conf.DEBUG:
             logger.error("Error trying to connect to the MQTT")
-            logger.error(ValueError)
         sleep(RESTART)
         create_mqtt_connection()
 
