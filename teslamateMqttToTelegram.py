@@ -20,11 +20,6 @@ if os.getenv('BOT_TOKEN') == None:
     exit(1)
 else:
     BOT_TOKEN = os.getenv('BOT_TOKEN')
-if os.getenv('BOT_CHAT_ID') == None:
-    print("Error: Please set the environment variable BOT_CHAT_ID and try again.")
-    exit(1)
-else:
-    BOT_CHAT_ID = os.getenv('BOT_CHAT_ID')
 
 with teslapy.Tesla(USER_EMAIL) as tesla:
     if not tesla.authorized:
