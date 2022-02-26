@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     libffi-dev \
     libssl-dev \
+    python3-dev \
     python-dev \
     openssl \
     cargo \
