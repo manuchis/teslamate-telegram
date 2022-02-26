@@ -13,9 +13,11 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     libssl-dev \
     python3-dev \
-    python-dev \
+    python3-pip \
     openssl \
     cargo \
+    && \
+    apt-get clean && \
  && rm -rf /var/lib/apt/lists/*
 
 # Update pip and install pip requirements
