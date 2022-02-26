@@ -7,6 +7,7 @@ from time import sleep
 import config as conf
 import logging
 import logging.handlers
+import telebot
 
 data = {
     "sent_resumen": 0,
@@ -32,6 +33,7 @@ RESTART = 15
 if conf.OPTIONS != None:
     OPTIONS = conf.OPTIONS.split("|")
 
+bot = telebot.TeleBot(conf.BOT_TOKEN, parse_mode=None)
 
 def setup_logging():
     if conf.DEBUG:
@@ -43,26 +45,38 @@ def setup_logging():
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
+def get_formated_text(data, message):
+
+    if data["display_name"] != "":
+        txt = "*{}* {}".format(data["display_name"], message['text'])
+    else:
+        txt = "{}".format(message['text'])
+    return txt
 
 def on_connect(client, userdata, flags, rc):
-    global botMessage
+    #global botMessage
 
     if conf.DEBUG:
         logger.info("Connected to the TeslaMate MQTT")
 
     client.subscribe("teslamate/cars/" + conf.CAR_ID + "/#")
 
-    botMessage = {
+    message = {
         "send": 0,
         "text": "🎉 Ahora estás conectado con _TeslaMate_ 🎉"
     }
-    send_to_telegram()
+    bot.reply_to(message, message.text)
 
 
 def on_disconnect(client, userdata, rc=0):
     if conf.DEBUG:
         logger.debug("Disconnected: result code " + str(rc))
 
+    message = {
+        "send": 0,
+        "text": "(!) MQTT desconectado, se intentará reconectar."
+    }
+    bot.reply_to(message, message.text)
     client.loop_stop()
     sleep(RESTART)
     create_mqtt_connection()
@@ -137,14 +151,7 @@ def on_message(client, userdata, message):
         logger.error("Exception on_message(): ", sys.exc_info()[0], message.topic, message.payload)
 
 
-def get_formated_text():
 
-    if data["display_name"] != "":
-        txt = "*{}* {}".format(data["display_name"], botMessage['text'])
-    else:
-        txt = "{}".format(botMessage['text'])
-
-    return txt
 
 
 def send_resume():
@@ -175,7 +182,7 @@ def send_resume():
     data['sent_resumen'] = 1
     send_to_telegram()
 
-
+'''
 def send_to_telegram():
     global botMessage
 
@@ -186,7 +193,7 @@ def send_to_telegram():
         logger.debug(response.text)
 
     botMessage = {"send": 1, "text": ""}
-
+'''
 
 def create_mqtt_connection():
     client = mqtt.Client()
@@ -211,12 +218,7 @@ def create_mqtt_connection():
 def main():
     setup_logging()
     create_mqtt_connection()
-
-    while True:
-        sleep(5)
-
-        if data['state'] == "asleep" and conf.SEND_RESUME and data['sent_resumen'] == 0:
-            send_resume()
+    bot.infinity_polling()
 
 
 if __name__ == '__main__':
