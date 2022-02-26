@@ -14,7 +14,7 @@ if os.getenv('USER_EMAIL') == None:
     print("Error: Please set the environment variable USER_EMAIL and try again.")
     exit(1)
 else:
-    USER_EMAIL = os.getenv('USER_EMAIL')
+    USER_EMAIL = str(os.getenv('USER_EMAIL'))
 if os.getenv('BOT_TOKEN') == None:
     print("Error: Please set the environment variable BOT_TOKEN and try again.")
     exit(1)
