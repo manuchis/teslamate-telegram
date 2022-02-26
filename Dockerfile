@@ -19,18 +19,12 @@ RUN apt-get update && apt-get install -y \
  && rm -rf /var/lib/apt/lists/*
 
 # Update pip and install pip requirements
-RUN python -m pip install --upgrade pip
+RUN python3 -m pip install --upgrade pip
 ADD requirements.txt .
-RUN python -m pip install -r requirements.txt
+RUN python3 -m pip install -r requirements.txt
 
 WORKDIR /app
 ADD . /app
-
-# The entrypoint translates the variables from the environment into a config file to be read from python
-# I did this to avoid modifying the original python app
-#COPY ./entrypoint.sh /
-#RUN chmod +x /entrypoint.sh
-#RUN /entrypoint.sh
 
 # Switching to a non-root user, please refer to https://aka.ms/vscode-docker-python-user-rights
 RUN useradd appuser && chown -R appuser /app
@@ -39,4 +33,4 @@ USER appuser
 
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "./teslamateMqttToTelegram.py"]
+CMD ["python3", "./teslamateMqttToTelegram.py"]
